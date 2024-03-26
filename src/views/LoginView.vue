@@ -1,37 +1,31 @@
 <script setup lang="ts">
    import { useForm, useField } from 'vee-validate'
    import { loginSchema as validationSchema } from '../validations/loginSchema';
-   import { useLogin } from '../composables/useAuth';
    import { type LoginInterface } from '../interfaces/auth.interface';
    import Swal from 'sweetalert2'
    import { useRouter } from 'vue-router';
-   const {login, errors, result} = useLogin()
-
+   import { useAuthStore } from '../stores/authStore';
+   
    const { handleSubmit } = useForm({ validationSchema })
    const { errorMessage: emailError, value: emailValue } = useField('email')
    const { errorMessage: passwordError, value: passwordValue } = useField('password')
    const router = useRouter()
+   const store = useAuthStore()
 
    const submit = handleSubmit(async (values) => {
       const credentials = values as LoginInterface
-      await login(credentials)
+      await store.login(credentials)
 
-      if(errors.value) {
+      if(store.errorMesage) {
          Swal.fire({
             title: 'Error!',
-            text: errors.value!,
+            text: store.errorMesage,
             icon: 'error',
             showConfirmButton: false,
-            timer: 1500
+            timer: 2000
          })
          return
       }
-      Swal.fire({
-			icon: "success",
-			title: result.value?.message,
-			showConfirmButton: false,
-			timer: 1500
-		});
       router.push({ name: 'admin-tasks' })
    })
 </script>

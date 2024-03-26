@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
+import { useAuthStore } from '@/stores/authStore'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,6 +14,9 @@ const router = createRouter({
       path: '/admin',
       name: 'admin',
       component: () => import('../views/admin/AdminLayout.vue'),
+      meta: {
+        requiredAuth: true
+      },
       children: [
         {
           path: '/admin/tasks',
@@ -22,6 +26,23 @@ const router = createRouter({
       ]
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  const requiredAuth = to.meta.requiredAuth
+  const store = useAuthStore()
+
+  if (!store.auth?.user && requiredAuth) {
+    next({ name: 'login' })
+  } else if(store.auth?.user) {
+    if(['/'].includes(to.path)) {
+      next({ name: 'admin-tasks' })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router
