@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/authStore';
 import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 const store = useAuthStore()
 const imageUrl = ref("https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg")
 
@@ -17,6 +18,14 @@ if (store.auth) {
          <h2 class="text-2xl text-[#F43F5F] font-bold uppercase">Noc Noc Tasks</h2>
       </div>
       <div class="flex-none gap-2">
+         <ul class="menu menu-horizontal px-1">
+            <li>
+               <RouterLink :to="{name: 'admin-tasks'}">Tareas</RouterLink>
+            </li>
+            <li>
+               <RouterLink :to="{name: 'admin-users'}">Usuarios</RouterLink>
+            </li>
+         </ul>
          <div class="dropdown dropdown-end">
             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                <div class="w-10 rounded-full">

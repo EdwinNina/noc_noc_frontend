@@ -1,20 +1,6 @@
+import type { User } from "./users-response.interface";
 
 export interface LoginResponse {
    user:    User;
    token:   string;
-}
-
-export interface User {
-   name:  string;
-   email: string;
-   id:    number;
-   role:  Role;
-}
-
-export interface Role {
-   id:          number;
-   name:        string;
-   description: string;
-   created_at:  string;
-   updated_at:  string;
 }

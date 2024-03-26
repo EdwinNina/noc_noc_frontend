@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useForm, useField } from 'vee-validate';
 import { ref, onMounted, watch } from 'vue';
-import type { Task, User } from '../interfaces/admin-tasks.interface';
 import { taskSchema, taskEditSchema } from '../validations/taskSchema';
 import { useTask } from '../composables/useTask';
 import { type TaskFormInt } from '../interfaces/task-form-interface';
@@ -10,6 +9,8 @@ import EditIcon from './icons/EditIcon.vue';
 import DeleteIcon from './icons/DeleteIcon.vue';
 import { tasksStatus, getStatusName } from '../constants/index';
 import { getSweetAlert } from '../helpers/index';
+import type { Task } from '@/interfaces/admin-tasks.interface';
+import type { User } from '@/interfaces/users-response.interface';
 
 const users = ref<User[]>([])
 const tasks = ref<Task[]>([])

@@ -22,6 +22,11 @@ const router = createRouter({
           path: '/admin/tasks',
           name: 'admin-tasks',
           component: () => import('../views/admin/AdminView.vue')
+        },
+        {
+          path: '/admin/users',
+          name: 'admin-users',
+          component: () => import('../views/admin/UsersView.vue')
         }
       ]
     }
