@@ -1,9 +1,9 @@
+import { requestError } from "@/helpers";
 import type { LoginResponse } from "@/interfaces/auth-response.interface";
 import type { LoginInterface } from "@/interfaces/auth.interface";
 import apiService from "@/lib/axios";
-import { AxiosError } from "axios";
 import { defineStore } from "pinia";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 export const useAuthStore = defineStore('auth', () => {
@@ -27,19 +27,19 @@ export const useAuthStore = defineStore('auth', () => {
          auth.value = data
          localStorage.setItem('AuthStore', JSON.stringify({ ...data }))
       } catch (error) {
-         if(error instanceof AxiosError) {
-            const errorMessage = error.response?.data?.message || 'error desconocido'
-            errorMesage.value = errorMessage
-         } else {
-            errorMesage.value = String(error)
-         }
+         errorMesage.value = requestError(error)
       }
    }
 
    const logout = async () => {
-      localStorage.removeItem('AuthStore')
-      auth.value = null
-      router.push({ name: 'login' })
+      try {
+         await apiService.post('/logout')
+         localStorage.removeItem('AuthStore')
+         auth.value = null
+         router.push({ name: 'login' })
+      } catch (error) {
+         errorMesage.value = requestError(error)
+      }
    }
 
    return {
