@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { isAdminUser } from '@/helpers';
 import { useAuthStore } from '@/stores/authStore';
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 const store = useAuthStore()
 const imageUrl = ref("https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg")
+const isAdmin = isAdminUser(store.auth?.user.role.name!)
 
 if (store.auth) {
    imageUrl.value = `https://ui-avatars.com/api/?name=${store.auth.user.name}`
@@ -22,7 +24,7 @@ if (store.auth) {
             <li>
                <RouterLink :to="{name: 'admin-tasks'}">Tareas</RouterLink>
             </li>
-            <li>
+            <li v-if="isAdmin">
                <RouterLink :to="{name: 'admin-users'}">Usuarios</RouterLink>
             </li>
          </ul>

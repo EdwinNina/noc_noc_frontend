@@ -34,18 +34,23 @@ export const useAuthStore = defineStore('auth', () => {
    const logout = async () => {
       try {
          await apiService.post('/logout')
-         localStorage.removeItem('AuthStore')
-         auth.value = null
-         router.push({ name: 'login' })
+         deleteLocalStorage()
       } catch (error) {
          errorMesage.value = requestError(error)
       }
+   }
+
+   const deleteLocalStorage = () => {
+      localStorage.removeItem('AuthStore')
+      auth.value = null
+      router.push({ name: 'login' })
    }
 
    return {
       auth,
       errorMesage,
       login,
-      logout
+      logout,
+      deleteLocalStorage
    }
 })

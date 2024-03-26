@@ -15,6 +15,10 @@
    const submit = handleSubmit(async (values) => {
       const credentials = values as LoginInterface
       await store.login(credentials)
+      
+      if(store.auth?.user.setPassword) {
+         return router.push({ name: 'reset-password'})
+      }
 
       if(store.errorMesage) {
          Swal.fire({

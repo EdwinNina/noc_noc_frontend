@@ -3,6 +3,7 @@ import LoginView from '@/views/LoginView.vue'
 import { useAuthStore } from '@/stores/authStore'
 import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
 import UpdatePasswordView from '@/views/UpdatePasswordView.vue'
+import ResetPasswordView from '@/views/ResetPasswordView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +22,11 @@ const router = createRouter({
       path: '/restore/:token',
       name: 'update-password',
       component: UpdatePasswordView
+    },
+    {
+      path: '/reset-password',
+      name: 'reset-password',
+      component: ResetPasswordView
     },
     {
       path: '/admin',
