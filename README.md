@@ -1,33 +1,10 @@
-# noc_noc_frontend
+# PRUEBA TECNICA FRONTEND DE NOC NOC
 
-This template should help get you started developing with Vue 3 in Vite.
+Esta es la aplicacion realizada como la prueba tecnica para la NOC APP realizada en Vue3 con typescript
 
-## Recommended IDE Setup
+### DESCRIPCION
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
+1. Clonar el repositorio
+2. Instalar dependencias de composer con el comando `npm install`
+3. Crear el archivo `.env.local` en base al archivo .env-example
+1. Correr el proyecto con el comando `npm run dev`
