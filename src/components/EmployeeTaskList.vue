@@ -82,16 +82,19 @@
       <div class="col-span-1 col-start-2 col-end-3 space-y-5 p-4">
          <TaskCard v-for="progress in progressTasks" :task="progress" :key="progress.id"
             :isMyTask="userId === progress.user.id"
+            @updateTaskList="updateTaskList"
          />
       </div>
       <div class="col-span-1 col-start-3 col-end-4 space-y-5 p-4">
          <TaskCard v-for="blocked in blockedTasks" :task="blocked" :key="blocked.id"
             :isMyTask="userId === blocked.user.id"
+            @updateTaskList="updateTaskList"
          />
       </div>
       <div class="col-span-1 col-start-4 col-end-5 space-y-5 p-4">
          <TaskCard v-for="completed in completedTasks" :task="completed" :key="completed.id"
             :isMyTask="userId === completed.user.id"
+            @updateTaskList="updateTaskList"
          />
       </div>
    </div>

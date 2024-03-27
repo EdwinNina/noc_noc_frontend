@@ -93,7 +93,7 @@ const submit = handleSubmit(async (values) => {
          <button class="btn btn-outline btn-primary" @click="openModal">Nuevo</button>
       </div>
       <div class="overflow-x-auto mt-10">
-         <table class="table table-zebra">
+         <table class="table table-zebra table-fixed">
             <thead>
                <tr>
                   <th>ID</th>

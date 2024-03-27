@@ -29,6 +29,6 @@ export const getSweetAlert = (message: string, isSuccess: boolean = true) => {
       text: message,
       icon: isSuccess ? 'success' : 'error',
       showConfirmButton: false,
-      timer: 2000
+      timer: 2500
    })
 }
