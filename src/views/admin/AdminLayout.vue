@@ -21,12 +21,25 @@ if (store.auth) {
       </div>
       <div class="flex-none gap-2">
          <ul class="menu menu-horizontal px-1">
-            <li>
-               <RouterLink :to="{name: 'admin-tasks'}">Tareas</RouterLink>
-            </li>
-            <li v-if="isAdmin">
-               <RouterLink :to="{name: 'admin-users'}">Usuarios</RouterLink>
-            </li>
+            <template v-if="isAdmin">
+               <li>
+                  <RouterLink :to="{name: 'admin-tasks'}">Tablero</RouterLink>
+               </li>
+               <li>
+                  <RouterLink :to="{name: 'admin-tasks-manage'}">Tareas</RouterLink>
+               </li>
+               <li>
+                  <RouterLink :to="{name: 'admin-users'}">Usuarios</RouterLink>
+               </li>
+               <li>
+                  <RouterLink :to="{name: 'admin-reportes'}">Reportes</RouterLink>
+               </li>
+            </template>
+            <template v-else>
+               <li>
+                  <RouterLink :to="{name: 'admin-tasks'}">Tareas</RouterLink>
+               </li>
+            </template>
          </ul>
          <div class="dropdown dropdown-end">
             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">

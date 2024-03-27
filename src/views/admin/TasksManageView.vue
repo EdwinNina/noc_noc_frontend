@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { useForm, useField } from 'vee-validate';
 import { ref, onMounted, watch } from 'vue';
-import { taskSchema, taskEditSchema } from '../validations/taskSchema';
-import { useTask } from '../composables/useTask';
-import { type TaskFormInt } from '../interfaces/task-form-interface';
-import { useModal } from '../composables/useModal';
-import EditIcon from './icons/EditIcon.vue';
-import DeleteIcon from './icons/DeleteIcon.vue';
-import { tasksStatus, getStatusName } from '../constants/index';
-import { getSweetAlert } from '../helpers/index';
-import type { Task } from '@/interfaces/admin-tasks.interface';
-import type { User } from '@/interfaces/users-response.interface';
+import { taskEditSchema, taskSchema } from '../../validations/taskSchema';
+import { type Task } from '../../interfaces/admin-tasks.interface';
+import { type User } from '../../interfaces/users-response.interface';
+import { useTask } from '../../composables/useTask';
+import { useModal } from '../../composables/useModal';
+import { type TaskFormInt } from '../../interfaces/task-form-interface';
+import { getSweetAlert } from '../../helpers/index';
+import { getStatusName, tasksStatus } from '../../constants/index';
+import EditIcon from '@/components/icons/EditIcon.vue';
+import DeleteIcon from '@/components/icons/DeleteIcon.vue';
 
 const users = ref<User[]>([])
 const tasks = ref<Task[]>([])
@@ -61,6 +61,11 @@ const submit = handleSubmit(async (values) => {
       closeModal()
       getTasks()
       getSweetAlert(response?.data.message)
+      titleValue.value = ''
+      descriptionValue.value = ''
+      userIdValue.value = ''
+      statusValue.value = ''
+      idEditTask.value = 0
    }
 })
 
