@@ -4,6 +4,7 @@
    import { BLOCKED, COMPLETED, PENDING, PROGRESS, tasksStatus } from '@/constants';
    import { useTask } from '../composables/useTask';
    import { getSweetAlert } from '@/helpers';
+   import { useRouter } from 'vue-router';
 
    const { closeModal, openModal, isModalOpen } = useModal()
    const {updateStatusTask, errorMesage} = useTask()
@@ -20,6 +21,7 @@
    const statusForm = ref(statusId)
    const errorForm = ref('')
    const emit= defineEmits(["updateTaskList"])
+   const router = useRouter()
 
    const submit = async () => {
       if(!statusForm.value) {
@@ -37,6 +39,11 @@
       getSweetAlert(response.message!)
       closeModal()
       emit('updateTaskList');
+   }
+
+   const openTask = () => {
+      const taskId = props.task.id
+      router.push({ name: 'admin-task', params: { id: taskId }})
    }
 </script>
 
@@ -59,7 +66,7 @@
                </svg>
             </summary>
             <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-               <li><a>Ver tarea</a></li>
+               <li><a @click="openTask">Ver tarea</a></li>
                <li v-if="isMyTask"><a @click="openModal">Cambiar estado</a></li>
             </ul>
          </details>
