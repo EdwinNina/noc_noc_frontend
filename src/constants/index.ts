@@ -1,9 +1,14 @@
 
+export const PENDING = 1
+export const PROGRESS = 2
+export const BLOCKED = 3
+export const COMPLETED = 4
+
 export const tasksStatus = [
-   { id: 1, title: 'Pendiente'},
-   { id: 2, title: 'En progreso'},
-   { id: 3, title: 'Bloqueado'},
-   { id: 4, title: 'Completado'},
+   { id: PENDING, title: 'Pendiente'},
+   { id: PROGRESS, title: 'En progreso'},
+   { id: BLOCKED, title: 'Bloqueado'},
+   { id: COMPLETED, title: 'Completado'},
 ]
 
 export const getStatusName = (id: number) => {

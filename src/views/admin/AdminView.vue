@@ -2,6 +2,7 @@
    import { useAuthStore } from '@/stores/authStore';
    import { isAdminUser } from '../../helpers/index';
    import TaskList from '@/components/TaskList.vue';
+   import EmployeeTaskList from '@/components/EmployeeTaskList.vue';
    const store = useAuthStore()
    const isAdmin = isAdminUser(store.auth?.user.role.name!)
 </script>
@@ -11,6 +12,6 @@
       <TaskList />
    </template>
    <template v-else>
-      <h1>Employee Panel</h1>
+      <EmployeeTaskList />
    </template>
 </template>

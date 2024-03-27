@@ -1,11 +1,21 @@
 import { requestError } from "@/helpers"
 import type { AdminTasksResponse } from "@/interfaces/admin-tasks.interface"
 import type { TaskFormInt } from "@/interfaces/task-form-interface"
+import type { TasksResponse } from "@/interfaces/task-list.interface"
 import apiService from "@/lib/axios"
 import { ref } from "vue"
 
 export const useTask = () => {
    const errorMesage = ref<null|string>(null)
+
+   const getTaskList = async () => {
+      try {
+         const {data} = await apiService<TasksResponse>('/tasks')
+         return data
+      } catch (error) {
+         errorMesage.value = requestError(error)
+      }
+   }
 
    const getAllTasks = async (): Promise<AdminTasksResponse|undefined> => {
       try {
@@ -49,11 +59,23 @@ export const useTask = () => {
       }
    }
 
+   const updateStatusTask = async(id: number, status: number) => {
+      try {
+         const {data} = await apiService.put(`/tasks/update-status/${id}`, {status})
+         return data
+      } catch (error) {
+         errorMesage.value = requestError(error)
+      }
+   }
+
    return {
       saveTask,
       getAllTasks,
       getTask,
       updateTask,
-      deleteTask
+      deleteTask,
+      getTaskList,
+      errorMesage,
+      updateStatusTask,
    }
 }
